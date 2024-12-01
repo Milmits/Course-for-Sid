@@ -30,10 +30,11 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         setTitle("Converter");
-        setSize(600, 400);
+        setSize(800, 600);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);  // Чтобы добавить подтверждение выхода
         setLocationRelativeTo(null); // Центрируем окно на экране
         setResizable(false); // Отключение возможности делать полноэкранный режим
+
 
         // Устанавливаем иконку
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("photo/icon.png"));
@@ -85,30 +86,31 @@ public class MainFrame extends JFrame {
                         + "Кафедра программного обеспечения информационных систем и технологий"
                         + "</div></html>"
         );
-        universityLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        universityLabel.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.3)));
         universityLabel.setHorizontalAlignment(SwingConstants.CENTER);
         universityLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Пробел в две строки
-        JLabel spacing1 = new JLabel("<html><br><br></html>");
+        JLabel spacing1 = new JLabel("<html><br><br><br><br></html>");
 
         // Название работы
         JLabel courseWorkLabel = new JLabel("Курсовая работа");
-        courseWorkLabel.setFont(new Font("Arial", Font.PLAIN, 17));
+        courseWorkLabel.setFont(new Font("Arial", Font.PLAIN, (int) (17 * 1.3)));
         courseWorkLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Подзаголовок
         JLabel disciplineLabel = new JLabel("по дисциплине «Программирование на языке Java»");
-        disciplineLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        disciplineLabel.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.3)));
         disciplineLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Тема курсовой работы
         JLabel projectTitleLabel = new JLabel("Конвертор чисел и системы счисления");
-        projectTitleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        projectTitleLabel.setFont(new Font("Arial", Font.BOLD, (int) (20 * 1.3)));
         projectTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Пробел
-        JLabel spacing2 = new JLabel("<html><br></html>");
+        JLabel spacing2 = new JLabel("<html><br><br></html>");
+
 
         // Фото и информация об авторе и руководителе
         JPanel authorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
@@ -117,7 +119,7 @@ public class MainFrame extends JFrame {
         ImageIcon imageIcon = new ImageIcon(
                 new ImageIcon(getClass().getClassLoader().getResource("photo/start.png"))
                         .getImage()
-                        .getScaledInstance(100, 100, Image.SCALE_SMOOTH) // Уменьшаем изображение
+                        .getScaledInstance((int) (100 * 1.3), (int) (100 * 1.3), Image.SCALE_SMOOTH) // Уменьшаем изображение
         );
         JLabel imageLabel = new JLabel(imageIcon);
 
@@ -129,14 +131,14 @@ public class MainFrame extends JFrame {
                         + "Сидорик Валерий Владимирович"
                         + "</div></html>"
         );
-        authorInfoLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        authorInfoLabel.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.3)));
 
         // Пробел
         JLabel spacing3 = new JLabel("<html><br></html>");
 
         // Город и год
         JLabel projectCityLabel = new JLabel("Минск 2024");
-        projectCityLabel.setFont(new Font("Arial", Font.PLAIN, 15)); // Применяем корректный шрифт
+        projectCityLabel.setFont(new Font("Arial", Font.PLAIN, (int) (15 * 1.3))); // Применяем корректный шрифт
         projectCityLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // Центрируем компонент
 
 
@@ -150,6 +152,12 @@ public class MainFrame extends JFrame {
 
         JButton nextButton = createStyledButton("Далее");
         JButton exitButton = createStyledButton("Выход");
+
+        Dimension buttonSize = new Dimension((int) (100), (int) (40)); // Размеры кнопок увеличены
+        nextButton.setPreferredSize(buttonSize);
+        nextButton.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.3))); // Увеличен шрифт
+        exitButton.setPreferredSize(buttonSize);
+        exitButton.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.3))); // Увеличен шрифт
 
         nextButton.addActionListener(e -> cardLayout.show(contentPanel, "MainMenu"));
         exitButton.addActionListener(e -> {
@@ -180,6 +188,7 @@ public class MainFrame extends JFrame {
         centerPanel.add(spacing3);
         centerPanel.add(projectCityLabel);
 
+
         // Добавление центральной части и кнопок на панель
         startScreenPanel.add(centerPanel, BorderLayout.CENTER);
         startScreenPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -200,7 +209,11 @@ public class MainFrame extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 // Задний фон
-                ImageIcon background = new ImageIcon(getClass().getClassLoader().getResource("photo/fon.jpg"));
+                ImageIcon background = new ImageIcon(
+                        new ImageIcon(getClass().getClassLoader().getResource("photo/fon.jpg"))
+                                .getImage()
+                                .getScaledInstance((int) (getWidth() * 1.3), (int) (getHeight() * 1.3), Image.SCALE_SMOOTH)
+                ); // Увеличиваем фон
                 g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
             }
         };
@@ -215,7 +228,7 @@ public class MainFrame extends JFrame {
 
         // Заголовок "Converter" красного цвета
         JLabel titleLabel = new JLabel("Converter");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, (int) (36 * 1.3)));
         titleLabel.setForeground(Color.RED); // Красный цвет для заголовка
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -228,11 +241,17 @@ public class MainFrame extends JFrame {
         JButton exitButton = createStyledButton("EXIT");
 
         // Устанавливаем одинаковый размер для кнопок
-        Dimension buttonSize = new Dimension(150, 35);
+        Dimension buttonSize = new Dimension((int) (150 * 1.3), (int) (35 * 1.3));
         startButton.setPreferredSize(buttonSize);
         aboutButton.setPreferredSize(buttonSize);
         aboutProgramButton.setPreferredSize(buttonSize);
         exitButton.setPreferredSize(buttonSize);
+
+        Font buttonFont = new Font("Arial", Font.PLAIN, (int) (14 * 1.3)); // Увеличенный шрифт для кнопок
+        startButton.setFont(buttonFont);
+        aboutButton.setFont(buttonFont);
+        aboutProgramButton.setFont(buttonFont);
+        exitButton.setFont(buttonFont);
 
         // Добавляем кнопки на центральную панель
         gbc.gridy = 1;
@@ -251,7 +270,7 @@ public class MainFrame extends JFrame {
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         bottomPanel.setOpaque(false); // Прозрачный фон
         JButton backButton = createStyledButton("Back");
-        backButton.setPreferredSize(new Dimension(75, 17)); // Уменьшенный размер кнопки "Back"
+        backButton.setPreferredSize(new Dimension(100, 40)); // Уменьшенный размер кнопки "Back"
         bottomPanel.add(backButton);
         mainMenuPanel.add(bottomPanel, BorderLayout.SOUTH);
 
@@ -282,12 +301,12 @@ public class MainFrame extends JFrame {
     private JPanel createConverterPanel() {
         JPanel converterPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Отступы между компонентами
+        gbc.insets = new Insets((int) (10 * 1.3), (int) (10 * 1.3), (int) (10 * 1.3), (int) (10 * 1.3)); // Отступы между компонентами
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Заголовок "Converter" красного цвета над всей панелью
         JLabel converterTitle = new JLabel("Converter");
-        converterTitle.setFont(new Font("Arial", Font.BOLD, 24));
+        converterTitle.setFont(new Font("Arial", Font.BOLD, (int) (24 * 1.3)));
         converterTitle.setForeground(Color.RED);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -296,53 +315,62 @@ public class MainFrame extends JFrame {
         gbc.gridwidth = 1; // Сброс ширины
 
         JLabel fromLabel = new JLabel("Из системы счисления:");
-        fromLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        fromLabel.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.3))); // Увеличенный шрифт
         gbc.gridx = 0;
         gbc.gridy = 1;
         converterPanel.add(fromLabel, gbc);
 
         fromBaseBox = new JComboBox<>(new String[]{"Двоичная", "Восьмеричная", "Десятичная", "Шестнадцатеричная"});
+        fromBaseBox.setFont(new Font("Arial", Font.PLAIN, (int) (12 * 1.3))); // Увеличенный шрифт выпадающего списка
         gbc.gridx = 1;
         gbc.gridy = 1;
         converterPanel.add(fromBaseBox, gbc);
 
         JLabel toLabel = new JLabel("В систему счисления:");
-        toLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        toLabel.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.3))); // Увеличенный шрифт
         gbc.gridx = 0;
         gbc.gridy = 2;
         converterPanel.add(toLabel, gbc);
 
         toBaseBox = new JComboBox<>(new String[]{"Двоичная", "Восьмеричная", "Десятичная", "Шестнадцатеричная"});
+        toBaseBox.setFont(new Font("Arial", Font.PLAIN, (int) (12 * 1.3))); // Увеличенный шрифт выпадающего списка
         gbc.gridx = 1;
         gbc.gridy = 2;
         converterPanel.add(toBaseBox, gbc);
 
         JLabel inputLabel = new JLabel("Введите число:");
-        inputLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        inputLabel.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.3))); // Увеличенный шрифт
         gbc.gridx = 0;
         gbc.gridy = 3;
         converterPanel.add(inputLabel, gbc);
 
         inputField = new JTextField();
+        inputField.setFont(new Font("Arial", Font.PLAIN, (int) (12 * 1.3))); // Увеличенный шрифт ввода текста
         gbc.gridx = 1;
         gbc.gridy = 3;
         converterPanel.add(inputField, gbc);
 
         JButton convertButton = createStyledButton("Конвертировать");
+        convertButton.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.2))); // Увеличенный шрифт кнопки
+        Dimension buttonSize = new Dimension((int) (150 * 1.2), (int) (35 * 1.2)); // Увеличенный размер кнопки
+        convertButton.setPreferredSize(buttonSize);
         gbc.gridx = 1;
         gbc.gridy = 4;
         converterPanel.add(convertButton, gbc);
 
         resultLabel = new JLabel("Результат:");
-        resultLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        resultLabel.setFont(new Font("Arial", Font.BOLD, (int) (16 * 1.3))); // Увеличенный шрифт результата
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridwidth = 2;
         resultLabel.setHorizontalAlignment(JLabel.CENTER);
         converterPanel.add(resultLabel, gbc);
 
-        // Добавляем кнопку "Назад" в конвертере
+
+        // Кнопка "Назад"
         JButton backButton = createStyledButton("Back");
+        backButton.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.1))); // Увеличенный шрифт кнопки
+        backButton.setPreferredSize(buttonSize); // Увеличенный размер кнопки
         gbc.gridy = 7;
         converterPanel.add(backButton, gbc);
 
@@ -361,6 +389,7 @@ public class MainFrame extends JFrame {
 
         // Обработчик для кнопки "Назад"
         backButton.addActionListener(e -> cardLayout.show(contentPanel, "MainMenu"));
+
 
         return converterPanel;
     }
@@ -381,27 +410,27 @@ public class MainFrame extends JFrame {
         JPanel infoPanel = new JPanel();
         infoPanel.setOpaque(false); // Прозрачная панель, чтобы был виден фон
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-        infoPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        infoPanel.setBorder(new EmptyBorder((int) (20 * 1.3), (int) (20 * 1.3), (int) (20 * 1.3), (int) (20 * 1.3)));
 
         // Устанавливаем одинаковый отступ для меток
-        EmptyBorder labelBorder = new EmptyBorder(5, 5, 5, 5);
+        EmptyBorder labelBorder = new EmptyBorder((int) (5 * 1.3), (int) (5 * 1.3), (int) (5 * 1.3), (int) (5 * 1.3));
 
         // Заголовок "Об авторе"
         JLabel aboutTitle = new JLabel("Об авторе:");
-        aboutTitle.setFont(new Font("Arial", Font.BOLD, 24));
+        aboutTitle.setFont(new Font("Arial", Font.BOLD, (int) (24 * 1.3))); // Увеличенный шрифт
         aboutTitle.setForeground(Color.RED);
         aboutTitle.setBorder(labelBorder);
         infoPanel.add(aboutTitle);
 
         // Добавление имени и группы
         JLabel nameLabel = new JLabel("Кучук Милан Михайлович");
-        nameLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        nameLabel.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.3))); // Увеличенный шрифт
         nameLabel.setForeground(Color.RED);  // Красный цвет текста
         nameLabel.setBorder(labelBorder);  // Установка отступа
         infoPanel.add(nameLabel);
 
         JLabel groupLabel = new JLabel("гр. 10702322");
-        groupLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        groupLabel.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.3))); // Увеличенный шрифт
         groupLabel.setForeground(Color.RED);  // Красный цвет текста
         groupLabel.setBorder(labelBorder);  // Установка отступа
         infoPanel.add(groupLabel);
@@ -409,9 +438,12 @@ public class MainFrame extends JFrame {
         // Текст о проекте
         JTextArea aboutText = new JTextArea(
                 "Работа над проектом велась 21 день.\n"
-                        + "На данный момент работаю над проектом\n 'Offliner'.\n"
-                        + "Можете посмотреть и поддержать меня: ");
-        aboutText.setFont(new Font("Arial", Font.PLAIN, 14));
+                        + "В проекте был предоставлен удобный инструмент\n"
+                        + "для конвертации чисел из одной системы счисления\n"
+                        + "в другую с использованием графического интерфейса\n"
+                        + "На данный момент работаю над проектом\n 'Offliner'.\n");
+
+        aboutText.setFont(new Font("Arial", Font.PLAIN, (int) (14))); // Увеличенный шрифт
         aboutText.setForeground(Color.RED);
         aboutText.setOpaque(false); // Прозрачный фон
         aboutText.setEditable(false);
@@ -425,11 +457,13 @@ public class MainFrame extends JFrame {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         infoPanel.add(scrollPane);
 
-        infoPanel.add(Box.createVerticalStrut(20));
+        infoPanel.add(Box.createVerticalStrut((int) (20 * 1.3))); // Увеличенные отступы
+
 
         // Создаем кликабельную ссылку
-        JLabel githubLink = new JLabel("<html><a href=''>https://github.com/Milmits</a></html>");
-        githubLink.setFont(new Font("Arial", Font.PLAIN, 14));
+        // Кликабельная ссылка на GitHub
+        JLabel githubLink = new JLabel("<html>GitHub: <a href=''>https://github.com/Milmits</a></html>");
+        githubLink.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.3))); // Увеличенный шрифт
         githubLink.setForeground(Color.RED);
         githubLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
         githubLink.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -442,27 +476,53 @@ public class MainFrame extends JFrame {
             }
         });
 
-        // Поднимаем ссылку повыше
+// Добавляем GitHub-ссылку в панель
         infoPanel.add(githubLink);
 
-        // Кнопка "Назад" в панели об авторе
-        JButton backButton = createStyledButton("Back");
-        backButton.addActionListener(e -> cardLayout.show(contentPanel, "MainMenu"));
-        infoPanel.add(backButton); // Добавляем кнопку "Назад" в панель информации
+// Информация о телефоне
+        JLabel phoneLabel = new JLabel("Phone: +375(29)265-34-75");
+        phoneLabel.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.3)));
+        phoneLabel.setForeground(Color.RED);
+        phoneLabel.setBorder(labelBorder);  // Установка отступа
+        infoPanel.add(phoneLabel);
 
+// Информация о почте
+        JLabel mailLabel = new JLabel("Mail: mlnkucuk@gmail.com");
+        mailLabel.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.3)));
+        mailLabel.setForeground(Color.RED);
+        mailLabel.setBorder(labelBorder);  // Установка отступа
+        infoPanel.add(mailLabel);
+
+// Кнопка "Назад"
+        JButton backButton = createStyledButton("Back");
+        backButton.setFont(new Font("Arial", Font.PLAIN, (int) (14 ))); // Увеличенный шрифт
+        Dimension backButtonSize = new Dimension((int) (200 * 1.3), (int) (90)); // Увеличенный размер кнопки
+        backButton.addActionListener(e -> cardLayout.show(contentPanel, "MainMenu"));
+
+// Добавляем кнопку "Back" после информации
+        infoPanel.add(Box.createVerticalStrut(40)); // Добавляем вертикальный отступ перед кнопкой
+        infoPanel.add(backButton);
+        // Добавляем кнопку "Назад" в панель информации
 
 
         // Правая часть - фото автора
         ImageIcon authorPhoto = new ImageIcon(getClass().getClassLoader().getResource("photo/1.jpg"));
+        JPanel photoPanel = new JPanel(new BorderLayout());
+        photoPanel.setOpaque(false); // Прозрачный фон
+        photoPanel.setBorder(BorderFactory.createEmptyBorder(50, 0, 50, 0)); // Отступы сверху и снизу, уменьшающие длину вертикальных линий рамки
+
         JLabel photoLabel = new JLabel();
-        photoLabel.setIcon(new ImageIcon(authorPhoto.getImage().getScaledInstance(250, 350, Image.SCALE_SMOOTH))); // Уменьшаем изображение
-        photoLabel.setBorder(BorderFactory.createLineBorder(Color.RED, 4));  // Красная рамка вокруг изображения
+        photoLabel.setIcon(new ImageIcon(authorPhoto.getImage().getScaledInstance((int) (250 * 1.3), (int) (350 * 1.3), Image.SCALE_SMOOTH)));
 
+        // Рамка вокруг изображения
+        photoLabel.setBorder(BorderFactory.createLineBorder(Color.RED, 4)); // Красная рамка
 
+        // Добавляем фото в панель
+        photoPanel.add(photoLabel, BorderLayout.CENTER);
 
         // Добавляем на панель
         aboutPanel.add(infoPanel, BorderLayout.EAST);
-        aboutPanel.add(photoLabel, BorderLayout.WEST);
+        aboutPanel.add(photoPanel, BorderLayout.WEST);
 
         return aboutPanel;
     }
@@ -507,8 +567,16 @@ public class MainFrame extends JFrame {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());  // Без рамок
 
         // Кнопка "Назад"
+        // Кнопка "Назад"
         JButton backButton = createStyledButton("Back");
+        backButton.setPreferredSize(new Dimension(120, 40)); // Размер кнопки
         backButton.addActionListener(e -> cardLayout.show(contentPanel, "MainMenu"));
+
+// Панель для кнопки с выравниванием по центру
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.add(backButton);
+        buttonPanel.setBorder(new EmptyBorder(10, 15, 10, 15)); // Отступы вокруг кнопки
+
 
         // Добавляем элементы на панель
         aboutProgramPanel.add(scrollPane, BorderLayout.CENTER);
