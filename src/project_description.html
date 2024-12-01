@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: red;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 18px;
+            color: red;
+            display: block;
+            margin-bottom: 10px;
+        }
+        input, select, button {
+            font-size: 16px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+        .result {
+            font-size: 20px;
+            text-align: center;
+            color: red;
+        }
+        .about-section {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .about-section p, .about-section a {
+            color: red;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            border: 4px solid red;
+            border-radius: 10px;
+            width: 250px;
+            height: 350px;
+        }
+        .back-button {
+            display: block;
+            margin: 0 auto;
+            width: 150px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Converter</h1>
+    <form id="converter-form">
+        <div class="form-group">
+            <label for="fromBase">Из системы счисления:</label>
+            <select id="fromBase">
+                <option value="2">Двоичная</option>
+                <option value="8">Восьмеричная</option>
+                <option value="10">Десятичная</option>
+                <option value="16">Шестнадцатеричная</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="toBase">В систему счисления:</label>
+            <select id="toBase">
+                <option value="2">Двоичная</option>
+                <option value="8">Восьмеричная</option>
+                <option value="10">Десятичная</option>
+                <option value="16">Шестнадцатеричная</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="inputNumber">Введите число:</label>
+            <input type="text" id="inputNumber" placeholder="Введите число">
+        </div>
+        <button type="button" onclick="convert()">Конвертировать</button>
+    </form>
+    <div class="result" id="result">Результат:</div>
+    <button class="back-button" onclick="goBack()">Назад</button>
+</div>
+<div class="container about-section">
+    <h2>Об авторе</h2>
+    <p>Кучук Милан Михайлович</p>
+    <p>гр. 10702322</p>
+    <p>Работа над проектом велась 21 день.</p>
+    <p>GitHub: <a href="https://github.com/Milmits" target="_blank">https://github.com/Milmits</a></p>
+    <p>Phone: +375(29)265-34-75</p>
+    <p>Mail: mlnkucuk@gmail.com</p>
+    <div class="image-container">
+        <img src="photo/1.jpg" alt="Author photo">
+    </div>
+    <button class="back-button" onclick="goBack()">Назад</button>
+</div>
+<script>
+    function convert() {
+        const fromBase = parseInt(document.getElementById('fromBase').value, 10);
+        const toBase = parseInt(document.getElementById('toBase').value, 10);
+        const inputNumber = document.getElementById('inputNumber').value.trim();
+
+        try {
+            const result = parseInt(inputNumber, fromBase).toString(toBase).toUpperCase();
+            document.getElementById('result').innerText = `Результат: ${result}`;
+        } catch (error) {
+            document.getElementById('result').innerText = 'Ошибка: неверный ввод числа!';
+        }
+    }
+
+    function goBack() {
+        alert("Переход в главное меню.");
+    }
+</script>
+</body>
+</html>

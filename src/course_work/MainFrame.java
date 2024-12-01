@@ -1,5 +1,7 @@
 package course_work;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
