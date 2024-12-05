@@ -405,73 +405,98 @@ public class MainFrame extends JFrame {
         gbc.insets = new Insets((int) (10 * 1.3), (int) (10 * 1.3), (int) (10 * 1.3), (int) (10 * 1.3)); // Отступы между компонентами
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Заголовок "Converter" красного цвета над всей панелью
+        // Установка начальной темы
+        converterPanel.setBackground(new Color(0xeeeeee));
+        final Color[] textColor = {Color.BLACK}; // Используем массив для хранения изменяемой ссылки
+
+        // Тематическое меню в самом верхнем левом углу
+        String[] themes = {"Theme: Light", "Theme: Dark"};
+        JComboBox<String> themeSelector = new JComboBox<>(themes);
+        themeSelector.setSelectedItem("Theme: Light");
+        themeSelector.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.1))); // Жирный шрифт для списка тем
+        themeSelector.setFocusable(false);
+
+        // Уменьшение длины
+        Dimension themeButtonSize = new Dimension((int) (25), (int) (20 * 1.2)); // Длина кнопки уменьшена
+        themeSelector.setPreferredSize(themeButtonSize);
+
+
+        // Позиционирование темы: ещё левее и выше
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START; // Верхний левый угол
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        converterPanel.add(themeSelector, gbc);
+
+        // Заголовок "Converter" красного цвета в центре
         JLabel converterTitle = new JLabel("Converter");
         converterTitle.setFont(new Font("Arial", Font.BOLD, (int) (24 * 1.3)));
         converterTitle.setForeground(Color.RED);
         gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2; // Чтобы занять две колонки
+        gbc.gridy = 1;
+        gbc.gridwidth = 2; // Занять две колонки
+        gbc.anchor = GridBagConstraints.CENTER; // Центрируем заголовок
         converterPanel.add(converterTitle, gbc);
         gbc.gridwidth = 1; // Сброс ширины
 
         JLabel fromLabel = new JLabel("Из системы счисления:");
-        fromLabel.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.3))); // Увеличенный шрифт
+        fromLabel.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.3)));
+        fromLabel.setForeground(textColor[0]);
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         converterPanel.add(fromLabel, gbc);
 
         fromBaseBox = new JComboBox<>(new String[]{"Двоичная", "Восьмеричная", "Десятичная", "Шестнадцатеричная"});
-        fromBaseBox.setFont(new Font("Arial", Font.PLAIN, (int) (12 * 1.3))); // Увеличенный шрифт выпадающего списка
+        fromBaseBox.setFont(new Font("Arial", Font.PLAIN, (int) (12 * 1.3)));
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         converterPanel.add(fromBaseBox, gbc);
 
         JLabel toLabel = new JLabel("В систему счисления:");
-        toLabel.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.3))); // Увеличенный шрифт
+        toLabel.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.3)));
+        toLabel.setForeground(textColor[0]);
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         converterPanel.add(toLabel, gbc);
 
         toBaseBox = new JComboBox<>(new String[]{"Двоичная", "Восьмеричная", "Десятичная", "Шестнадцатеричная"});
-        toBaseBox.setFont(new Font("Arial", Font.PLAIN, (int) (12 * 1.3))); // Увеличенный шрифт выпадающего списка
+        toBaseBox.setFont(new Font("Arial", Font.PLAIN, (int) (12 * 1.3)));
         gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         converterPanel.add(toBaseBox, gbc);
 
         JLabel inputLabel = new JLabel("Введите число:");
-        inputLabel.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.3))); // Увеличенный шрифт
+        inputLabel.setFont(new Font("Arial", Font.BOLD, (int) (14 * 1.3)));
+        inputLabel.setForeground(textColor[0]);
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         converterPanel.add(inputLabel, gbc);
 
         inputField = new JTextField();
-        inputField.setFont(new Font("Arial", Font.PLAIN, (int) (12 * 1.3))); // Увеличенный шрифт ввода текста
+        inputField.setFont(new Font("Arial", Font.PLAIN, (int) (12 * 1.3)));
         gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         converterPanel.add(inputField, gbc);
 
         JButton convertButton = createStyledButton("Конвертировать");
         convertButton.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.2))); // Увеличенный шрифт кнопки
-        Dimension buttonSize = new Dimension((int) (150 * 1.2), (int) (35 * 1.2)); // Увеличенный размер кнопки
-        convertButton.setPreferredSize(buttonSize);
         gbc.gridx = 1;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         converterPanel.add(convertButton, gbc);
 
         resultLabel = new JLabel("Результат:");
-        resultLabel.setFont(new Font("Arial", Font.BOLD, (int) (16 * 1.3))); // Увеличенный шрифт результата
+        resultLabel.setFont(new Font("Arial", Font.BOLD, (int) (16 * 1.3)));
+        resultLabel.setForeground(textColor[0]);
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         resultLabel.setHorizontalAlignment(JLabel.CENTER);
         converterPanel.add(resultLabel, gbc);
 
-
         // Кнопка "Назад"
         JButton backButton = createStyledButton("Back");
-        backButton.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.1))); // Увеличенный шрифт кнопки
-        backButton.setPreferredSize(buttonSize); // Увеличенный размер кнопки
+        backButton.setFont(new Font("Arial", Font.PLAIN, (int) (14 * 1.1)));
         gbc.gridy = 7;
         converterPanel.add(backButton, gbc);
 
@@ -491,9 +516,31 @@ public class MainFrame extends JFrame {
         // Обработчик для кнопки "Назад"
         backButton.addActionListener(e -> cardLayout.show(contentPanel, "MainMenu"));
 
+        // Обработчик для изменения темы
+        themeSelector.addActionListener(e -> {
+            String selectedTheme = (String) themeSelector.getSelectedItem();
+            if ("Theme: Dark".equals(selectedTheme)) {
+                converterPanel.setBackground(Color.DARK_GRAY);
+                textColor[0] = Color.WHITE;
+            } else {
+                converterPanel.setBackground(new Color(0xeeeeee));
+                textColor[0] = Color.BLACK;
+            }
+
+            // Обновляем цвета текста
+            for (Component component : converterPanel.getComponents()) {
+                if (component instanceof JLabel) {
+                    component.setForeground(textColor[0]);
+                }
+            }
+        });
 
         return converterPanel;
     }
+
+
+
+
     /**
      * Создаёт панель с информацией об авторе.
      *
